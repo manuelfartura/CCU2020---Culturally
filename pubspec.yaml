@@ -45,6 +45,8 @@ flutter:
     - assets/listen.png
     - assets/nos_alive.png
     - assets/pi100pe.png
+    - assets/berardo.png
+    - assets/teatro.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

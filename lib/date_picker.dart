@@ -16,7 +16,7 @@ class _DatePickerState extends State<DatePicker> {
   /// This will be called every time while displaying day in calender.
   bool _decideWhichDayToEnable(DateTime day) {
     if ((day.isAfter(DateTime.now().subtract(Duration(days: 1))) &&
-        day.isBefore(DateTime.now().add(Duration(days: 10))))) {
+        day.isBefore(DateTime.now().add(Duration(days: 1))))) {
       return true;
     }
     return false;
@@ -109,7 +109,7 @@ class _DatePickerState extends State<DatePicker> {
       fieldHintText: 'Month/Date/Year',
       builder: (context, child) {
         return Theme(
-          data: ThemeData.light(),
+          data: ThemeData.dark(),
           child: child,
         );
       },

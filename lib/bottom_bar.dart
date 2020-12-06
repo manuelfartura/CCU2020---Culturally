@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:culturally/main.dart';
 
 class BottomBar extends StatelessWidget {
   @override
@@ -28,8 +29,13 @@ class BottomBar extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Icon(Icons.home, color: Colors.white),
-                      Icon(Icons.favorite, color: Colors.white)
+                      IconButton(
+                          icon: Icon(Icons.home, color: Colors.white),
+                          onPressed: null),
+                      IconButton(
+                          icon: Icon(Icons.favorite, color: Colors.white),
+                          //onPressed: pushFavorites
+                      ),
                     ],
                   )
               ),
@@ -39,8 +45,12 @@ class BottomBar extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Icon(Icons.forum, color: Colors.white),
-                      Icon(Icons.account_box, color: Colors.white)
+                      IconButton(
+                          icon: Icon(Icons.forum, color: Colors.white),
+                          onPressed: null),
+                      IconButton(
+                          icon: Icon(Icons.account_box, color: Colors.white),
+                          onPressed: null),
                     ],
                   )
               ),
@@ -49,4 +59,7 @@ class BottomBar extends StatelessWidget {
       ),
     );
   }
+
+
+
 }
