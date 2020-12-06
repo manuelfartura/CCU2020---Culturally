@@ -5,6 +5,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
+import 'dart:async';
+
 
 void main() => runApp(MyApp());
 
@@ -30,11 +32,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   DateTime selectedDate = DateTime.now();
   final _favorites = Set<int>();
+  OverlayEntry _overlayEntry;
+  OverlayState overlayState;
+  String dropdownValue = ' Alphabetical Asc.        ';
+  double _currentPriceSliderValue = 100;
+  double _currentCapacitySliderValue = 10;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /* App bar, at the top of the screen*/
+  /* -------------------------------- App bar, at the top of the screen --------------------------*/
       appBar: AppBar(
         backgroundColor: Colors.orange,
         elevation: 9.0,
@@ -56,15 +63,17 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           ),
           IconButton(
               icon: Icon(Icons.tune, color: Colors.white),
-              onPressed: () {}
+              onPressed: () {
+                showFilterOverlay(context);
+              }
           ),
         ],
       ),
-      /* Main screen body, has event cards */
+/* ------------------------------- Main screen body, has event cards ------------------------------*/
       body: ListView(
         padding: EdgeInsets.all(10.0),
         children: <Widget>[
-/* ------------------- Date picker box -------------------*/
+/* --------------------------------- Date picker box --------------------------------*/
       InkWell(
         onTap: () => _selectDate(context),
         child:
@@ -116,8 +125,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           ),
           SizedBox(height: 15.0),
 
-          /* ------------------- Event cards list -------------------*/
-          if(selectedDate.day.isOdd)
+/* --------------------------------------- Event cards list ----------------------------------*/
+          if(selectedDate.day.isOdd && _currentPriceSliderValue >= 8)
           _buildCard(
               1,
               'Listen (2020)',
@@ -125,7 +134,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               'assets/listen.png',
               'Cinema',
               context),
-          if(selectedDate.day.isEven)
+          if(selectedDate.day.isEven && _currentPriceSliderValue >= 68)
           _buildCard(
               2,
               'NOS Alive',
@@ -133,7 +142,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               'assets/nos_alive.png',
               'Concert',
               context),
-          if(selectedDate.day.isOdd)
+          if(selectedDate.day.isOdd && _currentPriceSliderValue >= 22)
           _buildCard(
               3,
               'Pi 100 Pé',
@@ -141,7 +150,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               'assets/pi100pe.png',
               'Comedy',
               context),
-          if(selectedDate.day.isEven)
+          if(selectedDate.day.isEven && _currentPriceSliderValue >= 18 )
           _buildCard(
               4,
               'Primeiro Modernismo às Novas Vanguardas do Século XX',
@@ -149,7 +158,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               'assets/berardo.png',
               'Museum',
               context),
-          if(selectedDate.day.isOdd)
+          if(selectedDate.day.isOdd && _currentPriceSliderValue >= 18 )
           _buildCard(
               5,
               'Uma Mulher Não Chora',
@@ -161,16 +170,16 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       ),
 
       /* ------------------- Central, flaoting action button for the match -------------------*/
+
       floatingActionButton: FloatingActionButton(onPressed: () {},
         backgroundColor: Colors.deepOrange,
         child: Image.asset('assets/groups.png', height: 35, width: 35,),
       ),
-
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
-      /* ------------------- Bottom Navigation Bar with the 4 icons -------------------*/
-      bottomNavigationBar: _bottomAppBar(),
+      /* ---------------------- Bottom Navigation Bar with the 4 icons ----------------------*/
 
+      bottomNavigationBar: _bottomAppBar(),
 
     );
   }
@@ -205,7 +214,10 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       children: <Widget>[
                         IconButton(
                             icon: Icon(Icons.home, color: Colors.white),
-                            onPressed: pushHomepage),
+                            onPressed: (){
+                              Navigator.pop(context);
+                            }
+                        ),
                         IconButton(
                             icon: Icon(Icons.favorite, color: Colors.white),
                             onPressed: pushFavorites
@@ -349,7 +361,20 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           ),
     );
   }
+  /*
+/*---------------------------------- FUNCTION FOR NAVIGATING TO HOME WITH BOTTOM BAR ICON ----------------------------------*/
+  void pushHomepage(){
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+          builder: (BuildContext context) {
+            return HomePage();
+          }
+      ),
+    );
+  }
 
+
+   */
 /*---------------------------------- FUNCTION FOR NAVIGATING TO FAVORITES WITH BOTTOM BAR ICON ----------------------------------*/
   void pushFavorites() {
     Navigator.of(context).push(
@@ -516,6 +541,221 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       setState(() {
         selectedDate = picked;
       });
+  }
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------- FILTERING MENU OVERLAY -------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+  showFilterOverlay  (BuildContext context) async {
+    overlayState = Overlay.of(context);
+    //_overlayEntry?.remove();
+    _overlayEntry = OverlayEntry(
+        builder: (context) => Positioned(
+          top: 40,
+          right: 3,
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      spreadRadius: 3.0,
+                      blurRadius: 5.0)
+                ],
+                color: Colors.white,),
+            child: Column(
+              children: [
+        /* -----------------  FILTER TITLE -------------------*/
+               Row(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   crossAxisAlignment: CrossAxisAlignment.center,
+                 children: [
+                   Padding(
+                       padding: EdgeInsets.only(top: 15.0, bottom: 10.0, left: 15, right: 15),
+                       child:
+                         Text('Filters',
+                           style: TextStyle(
+                               fontFamily: 'Roboto',
+                               fontSize: 20.0,
+                               color: Colors.black,
+                               decoration: TextDecoration.none)
+                       ),
+                   ),
+                ]
+               ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 5.0, bottom: 10.0, left: 15, right: 15),
+                        child: Material (child: DropdownButton<String>(
+                          value: dropdownValue,
+                          icon: Icon(Icons.arrow_downward),
+                          iconSize: 20,
+                          elevation: 16,
+                          style: TextStyle(fontFamily: 'Roboto', color: Colors.black),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.orange,
+                          ),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              dropdownValue = newValue;
+                            });
+                          },
+                          items: <String>[' Alphabetical Asc.        ', 'Alphabetical Dsc.', 'Price Ascending', 'Price Descending']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        )
+                        )
+                      ),
+                    ]
+                ),
+      /* ----------------------- PRICE SLIDER --------------------------------------------*/
+
+                Row(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   crossAxisAlignment: CrossAxisAlignment.center,
+                 children: [
+                   Padding(
+                     padding: EdgeInsets.only(top: 3.0, bottom: 1.0, left: 15, right: 15),
+                     child:
+                     Text('Max Price (€)',
+                         style: TextStyle(
+                             fontFamily: 'Roboto',
+                             fontSize: 14.0,
+                             color: Colors.grey,
+                             decoration: TextDecoration.none)
+                     ),
+                   ),
+                 ]
+               ),
+               Row(
+                 mainAxisAlignment: MainAxisAlignment.start,
+                 crossAxisAlignment: CrossAxisAlignment.center,
+                 children: [
+                   Material(
+
+                     child: SliderTheme(
+                         data: SliderTheme.of(context).copyWith(
+                           activeTrackColor: Colors.orange,
+                           inactiveTrackColor: Colors.grey,
+                           trackShape: RoundedRectSliderTrackShape(),
+                           trackHeight: 10.0,
+                           thumbColor: Colors.deepOrange,
+                           thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                           overlayColor: Colors.red.withAlpha(32),
+                           overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
+                         ),
+                        child: Slider(
+                                value: _currentPriceSliderValue,
+                                min: 0,
+                                max: 100,
+                                divisions: 5,
+                                label: _currentPriceSliderValue.round().toString(),
+                                onChanged: (double value) {
+                                  setState(() {
+                                    _currentPriceSliderValue = value;
+                                  });
+                                },
+                       )
+                     )
+                   )
+                 ]
+               ),
+
+        /* ----------------------- CAPACITY SLIDER --------------------------------------------*/
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 3.0, bottom: 1.0, left: 15, right: 15),
+                        child:
+                        Text('Capacity (no. of people)',
+                            style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: 14.0,
+                                color: Colors.grey,
+                                decoration: TextDecoration.none)
+                        ),
+                      ),
+                    ]
+                ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Material(
+
+                          child: SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: Colors.orange,
+                                inactiveTrackColor: Colors.grey,
+                                trackShape: RoundedRectSliderTrackShape(),
+                                trackHeight: 10.0,
+                                thumbColor: Colors.deepOrange,
+                                thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                overlayColor: Colors.red.withAlpha(32),
+                                overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
+                              ),
+                              child: Slider(
+                                value: _currentCapacitySliderValue,
+                                min: 0,
+                                max: 20,
+                                divisions: 5,
+                                label: _currentCapacitySliderValue.round().toString(),
+                                onChanged: (double value) {
+                                  setState(() {
+                                    _currentCapacitySliderValue = value;
+                                  });
+                                },
+                              )
+                          )
+                      )
+                    ]
+                ),
+                GestureDetector(
+                  onTap: () {_overlayEntry.remove(); },
+                  child:
+                      Padding(
+                        padding: EdgeInsets.all(15),
+                        child:
+                          Container(
+                            decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadiusDirectional.all(
+                                    Radius.circular(25.0)),
+                                color: Colors.deepOrange,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
+                              /* ------------------- Type orange tag -------------------*/
+                              child: Text('Done', style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  decoration: TextDecoration.none)),
+                              )
+                          ),
+                      ),
+                ),
+
+              ],
+            ),
+          )
+        ));
+
+    overlayState.insert(_overlayEntry);
+    //await Future.delayed(Duration(seconds: 15));
+    //overlayEntry.remove();
   }
 
 
