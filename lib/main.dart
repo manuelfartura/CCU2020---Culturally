@@ -355,6 +355,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   }
 
 /*---------------------------------- FUNCTION FOR NAVIGATING TO HOME WITH BOTTOM BAR ICON ----------------------------------*/
+
   void pushHomepage(){
     Navigator.of(context).push(
         MaterialPageRoute<void>(
@@ -365,10 +366,62 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     );
   }
 
+
+/*---------------------------------- FUNCTION FOR NAVIGATING TO REVIES WITH BOTTOM BAR ICON ----------------------------------*/
+  void pushReviews(){
+    //VAI E CONSTROI ECRA REVIEWS
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+          builder: (BuildContext context) {
+
+            return Scaffold(
+                appBar: AppBar(
+                    backgroundColor: Colors.orange,
+                    elevation: 9.0,
+                    leading: IconButton(
+                      icon: Icon(Icons.arrow_back, color: Colors.white),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                title: Text('Reviews',
+                style: TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 20.0,
+                color: Colors.white)),
+                ),
+
+            body: ListView(
+              padding: EdgeInsets.only(top: 30.0),
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("No reviews yet", style: TextStyle(fontSize: 30, color: Colors.grey, fontFamily: 'Roboto'),),
+                  ],
+
+                ),
+            ]),
+            floatingActionButton: FloatingActionButton(onPressed: () {},
+              backgroundColor: Colors.grey,
+              child: Icon(Icons.edit, size: 25,),
+            ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+            );
+
+
+          }
+      ),
+    );
+  }
+
+/*gohere*/
+
 /*---------------------------------- FUNCTION FOR NAVIGATING TO EVENT DETAILS  ----------------------------------*/
   void pushEventDetails(int id){
     bool isFavorite = _favorites.contains(id);
-
+// CASO PARA CADA EVENTO, DESENHA  O ECRA
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         // Add lines from here...
@@ -507,7 +560,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                     padding: EdgeInsets.only(top:15, left: 15),
                                     child:
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: pushReviews,
                                       child:
                                       Container(
                                           decoration: BoxDecoration(
@@ -537,7 +590,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                     padding: EdgeInsets.only(top:15, left: 15),
                                     child:
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: pushReviews,
                                       child:
                                       Container(
                                           decoration: BoxDecoration(
@@ -709,7 +762,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                     padding: EdgeInsets.only(top:15, left: 15),
                                     child:
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: pushReviews,
                                       child:
                                       Container(
                                           decoration: BoxDecoration(
@@ -739,7 +792,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                     padding: EdgeInsets.only(top:15, left: 15),
                                     child:
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: pushReviews,
                                       child:
                                       Container(
                                           decoration: BoxDecoration(
@@ -911,7 +964,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                   padding: EdgeInsets.only(top:15, left: 15),
                                   child:
                                   InkWell(
-                                    onTap: () {},
+                                    onTap: pushReviews,
                                     child:
                                     Container(
                                         decoration: BoxDecoration(
@@ -941,7 +994,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                   padding: EdgeInsets.only(top:15, left: 15),
                                   child:
                                   InkWell(
-                                    onTap: () {},
+                                    onTap: pushReviews,
                                     child:
                                     Container(
                                         decoration: BoxDecoration(
@@ -1113,7 +1166,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                     padding: EdgeInsets.only(top:15, left: 15),
                                     child:
                                       InkWell(
-                                      onTap: () {},
+                                      onTap: pushReviews,
                                       child:
                                           Container(
                                               decoration: BoxDecoration(
@@ -1143,7 +1196,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                       padding: EdgeInsets.only(top:15, left: 15),
                                       child:
                                       InkWell(
-                                        onTap: () {},
+                                        onTap: pushReviews,
                                         child:
                                           Container(
                                               decoration: BoxDecoration(
@@ -1315,7 +1368,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                     padding: EdgeInsets.only(top:15, left: 15),
                                     child:
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: pushReviews,
                                       child:
                                       Container(
                                           decoration: BoxDecoration(
@@ -1345,7 +1398,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                     padding: EdgeInsets.only(top:15, left: 15),
                                     child:
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: pushReviews,
                                       child:
                                       Container(
                                           decoration: BoxDecoration(
