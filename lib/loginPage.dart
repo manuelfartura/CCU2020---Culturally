@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:culturally/main.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -79,7 +80,7 @@ class LoginPageState extends State<LoginPage> {
             child: Align(
               alignment: Alignment.center,
               child: Text('Log In',
-                style: TextStyle(fontSize: 36, fontWeight: FontWeight.normal, color: Colors.orange[700], decoration: TextDecoration.none)))),
+                style: TextStyle(fontSize: 36, fontWeight: FontWeight.normal, fontFamily:'Roboto', color: Colors.deepOrange, decoration: TextDecoration.none)))),
         new Positioned.fill(
             top: 550,
             child: Align(
@@ -91,7 +92,13 @@ class LoginPageState extends State<LoginPage> {
                   minWidth: 100,
                   shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
                   onPressed: () {
-                      /*...*/
+                    Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                          builder: (BuildContext context) {
+                            return HomePage();
+                          }
+                      ),
+                    );
                   },
                   child: Text(
                     "Log In",

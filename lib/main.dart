@@ -15,11 +15,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //debugShowCheckedModeBanner: false,
-      //title: 'Culturally',
-      //theme: ThemeData(
-      //  primaryColor: Colors.orange,
-      //),
+      debugShowCheckedModeBanner: false,
+      title: 'Culturally',
+      theme: ThemeData(
+        primaryColor: Colors.orange,
+      ),
       home: FirstPage(),
     );
   }
@@ -237,7 +237,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                             onPressed: pushChat),
                         IconButton(
                             icon: Icon(Icons.account_box, color: Colors.white),
-                            onPressed: null),
+                            onPressed: pushProfile),
                       ],
                     )
                 ),
@@ -368,7 +368,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   }
 
 
-/*---------------------------------- FUNCTION FOR NAVIGATING TO REVIES WITH BOTTOM BAR ICON ----------------------------------*/
+/*---------------------------------- FUNCTION FOR NAVIGATING TO REVIEWS WITH BOTTOM BAR ICON ----------------------------------*/
   void pushReviews(){
     //VAI E CONSTROI ECRA REVIEWS
     Navigator.of(context).push(
@@ -393,8 +393,16 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               ),
 
               body: ListView(
-                  padding: EdgeInsets.only(top: 30.0),
+                  //padding: EdgeInsets.only(top: 30.0),
                   children: <Widget>[
+                    Expanded(
+                        child: Container(
+                          //fit: BoxFit.contain,
+                          alignment: Alignment.centerLeft,
+                          child: Image.asset('assets/reviews.PNG'),
+                        )
+                    ),
+                    /*
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -403,10 +411,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       ],
 
                     ),
+                     */
                   ]),
               floatingActionButton: FloatingActionButton(onPressed: () {},
-                backgroundColor: Colors.grey,
-                child: Icon(Icons.edit, size: 25,),
+                backgroundColor: Colors.deepOrange,
+                child: Icon(Icons.rate_review, size: 25,),
               ),
               floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
             );
@@ -2119,13 +2128,22 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   Navigator.pop(context);
                 },
               ),
-              title: Text('Match',
+              title: Text('Random Match Made!',
                   style: TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 20.0,
                       color: Colors.white)),
             ),
             body: ListView(
+                children:[
+                      Expanded(
+                        child: Container(
+                        //fit: BoxFit.contain,
+                        alignment: Alignment.centerLeft,
+                        child: Image.asset('assets/match.PNG'),
+                      )),
+                ]
+/*
                 padding: EdgeInsets.all(10.0),
                 children: [
                   /*Hard coded favorites check*/
@@ -2175,15 +2193,60 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                         'Theater',
                         context),
                 ]
+            ),*/
             ),
-            floatingActionButton: FloatingActionButton(onPressed: pushMatchScreenInterests,
+
+            floatingActionButton: FloatingActionButton(onPressed: pushChat,
+              backgroundColor: Colors.white,
+              child: Icon(Icons.forum, size: 35, color: Colors.deepOrange),
+            ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
+            //bottomNavigationBar: _bottomAppBar(),
+
+          );
+        }, // ...to here.
+      ),
+    );
+  }
+
+  void pushProfile(){
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        // Add lines from here...
+        builder: (BuildContext context) {
+          return Scaffold(
+            backgroundColor: Colors.orange,
+            appBar: AppBar(
+              elevation: 9.0,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.white),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              title: Text('Profile',
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 20.0,
+                      color: Colors.white)),
+            ),
+            body: ListView(
+                //padding: EdgeInsets.all(10.0),
+                children: [
+                  Expanded(
+                      child: Container(
+                        //fit: BoxFit.contain,
+                        alignment: Alignment.centerLeft,
+                        child: Image.asset('assets/profile.PNG'),
+                      )),
+                ]
+            ),
+            floatingActionButton: FloatingActionButton(onPressed: pushChat,
               backgroundColor: Colors.deepOrange,
-              child: Image.asset('assets/groups.png', height: 35, width: 35,),
+              child: Icon(Icons.edit, size: 35, color: Colors.white),
             ),
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-
-            bottomNavigationBar: _bottomAppBar(),
-
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           );
         }, // ...to here.
       ),
@@ -2251,15 +2314,23 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   Navigator.pop(context);
                 },
               ),
-              title: Text('Match',
+              title: Text('Chat',
                   style: TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 20.0,
                       color: Colors.white)),
             ),
             body: ListView(
-                padding: EdgeInsets.all(10.0),
+                //padding: EdgeInsets.all(10.0),
                 children: [
+                  Expanded(
+                      child: Container(
+                        //fit: BoxFit.contain,
+                        alignment: Alignment.centerLeft,
+                        child: Image.asset('assets/chat.PNG'),
+                      )
+                  ),
+                  /*
                   /*Messages*/
                   _buildMessage(
                         1,
@@ -2303,8 +2374,12 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       fontSize: 10.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.black)),
+
+                   */
                 ]
+
             ),
+
             floatingActionButton: FloatingActionButton(onPressed: pushMatchScreenInterests,
               backgroundColor: Colors.deepOrange,
               child: Image.asset('assets/groups.png', height: 35, width: 35,),

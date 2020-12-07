@@ -83,7 +83,7 @@ class FirstPage extends StatelessWidget {
                 },
                 child: Text(
                   "Log In",
-                  style: TextStyle(fontSize: 20.0),
+                  style: TextStyle(fontSize: 20.0, fontFamily:'Roboto', color: Colors.deepOrange),
                 )))),
         new Positioned.fill(
             top: 305,
@@ -103,7 +103,7 @@ class FirstPage extends StatelessWidget {
                 },
                 child: Text(
                   "Sign Up",
-                  style: TextStyle(fontSize: 20.0),
+                  style: TextStyle(fontSize: 20.0, fontFamily:'Roboto', color: Colors.deepOrange),
                 ),
               )))]));
   }

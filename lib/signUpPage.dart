@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:culturally/main.dart';
 import 'package:path/path.dart';
 //import 'package:sqflite/sqflite.dart';
 
@@ -121,7 +122,7 @@ class SignUpPageState extends State<SignUpPage> {
                   child: Align(
                       alignment: Alignment.center,
                       child: Text('Sign Up',
-                          style: TextStyle(fontSize: 36, fontWeight: FontWeight.normal, color: Colors.orange[700], decoration: TextDecoration.none)))),
+                          style: TextStyle(fontSize: 36, fontWeight: FontWeight.normal, fontFamily:'Roboto', color: Colors.deepOrange, decoration: TextDecoration.none)))),
               new Positioned.fill(
                   top: 550,
                   child: Align(
@@ -133,11 +134,17 @@ class SignUpPageState extends State<SignUpPage> {
                         minWidth: 100,
                         shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
                         onPressed: () {
-                          /*...*/
+                          Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                                builder: (BuildContext context) {
+                                  return HomePage();
+                                }
+                            ),
+                          );
                         },
                         child: Text(
                           "Sign Up",
-                          style: TextStyle(fontSize: 20.0),
+                          style: TextStyle(fontSize: 20.0, fontFamily: 'Roboto'),
                         ),
                       )))
             ]));
