@@ -252,101 +252,104 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   Widget _buildCard(int id, String name, String description, String imagePath, String type, context) {
     final isFavorite = _favorites.contains(id);
-    return Padding(
-        padding: EdgeInsets.only(left: 1.0, top: 1.0, right: 1.0, bottom: 8.0),
-        child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 3.0,
-                      blurRadius: 5.0)
-                ],
-                color: Colors.white),
+    return InkWell(
+        onTap: () {pushEventDetails(id);},
+        child: Padding(
+          padding: EdgeInsets.only(left: 1.0, top: 1.0, right: 1.0, bottom: 8.0),
+          child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 3.0,
+                        blurRadius: 5.0)
+                  ],
+                  color: Colors.white),
 
-            child: Row(
-              children: <Widget>[
-                /*------------------- Image on the left -------------------*/
-                Expanded(
-                    child: Container(
-                      //fit: BoxFit.contain,
-                      alignment: Alignment.centerLeft,
-                      child: Image.asset(imagePath),
-                    )),
-                /*------------------- Info on the right -------------------*/
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 8.0,),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadiusDirectional.all(
-                                        Radius.circular(20.0)),
-                                    color: Colors.orange
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.all(6.0),
-                                  /* ------------------- Type orange tag -------------------*/
-                                  child: Text(type, style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontSize: 10.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white)),
-                                )
-                            ),
-                            IconButton(
-                                icon: Icon(
-                                  /*------------------- Favorite icon, with color and fill check -------------------*/
-                                  isFavorite ? Icons.favorite : Icons.favorite_border,
-                                  color: isFavorite ? Colors.red : null,
-                                ),
-                              onPressed: (){
-                                  setState(() {
-                                    if(isFavorite){
-                                      _favorites.remove(id);
-                                    } else {
-                                      _favorites.add(id);
-                                    }
-                                  });
-                              },
-                            )
-                          ],
+              child: Row(
+                children: <Widget>[
+                  /*------------------- Image on the left -------------------*/
+                  Expanded(
+                      child: Container(
+                        //fit: BoxFit.contain,
+                        alignment: Alignment.centerLeft,
+                        child: Image.asset(imagePath),
+                      )),
+                  /*------------------- Info on the right -------------------*/
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 8.0,),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadiusDirectional.all(
+                                          Radius.circular(20.0)),
+                                      color: Colors.orange
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(6.0),
+                                    /* ------------------- Type orange tag -------------------*/
+                                    child: Text(type, style: TextStyle(
+                                        fontFamily: 'Roboto',
+                                        fontSize: 10.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white)),
+                                  )
+                              ),
+                              IconButton(
+                                  icon: Icon(
+                                    /*------------------- Favorite icon, with color and fill check -------------------*/
+                                    isFavorite ? Icons.favorite : Icons.favorite_border,
+                                    color: isFavorite ? Colors.red : null,
+                                  ),
+                                onPressed: (){
+                                    setState(() {
+                                      if(isFavorite){
+                                        _favorites.remove(id);
+                                      } else {
+                                        _favorites.add(id);
+                                      }
+                                    });
+                                },
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: 8.0, top: 8.0, bottom: 8.0, right: 8.0),
-                        /* ------------------- Event Title -------------------*/
-                        child: Text(name, style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepOrange)),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        /*------------------- Event description -------------------*/
-                        child: Text(description, style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 10.0,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black)),
-                      )
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: 8.0, top: 8.0, bottom: 8.0, right: 8.0),
+                          /* ------------------- Event Title -------------------*/
+                          child: Text(name, style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.deepOrange)),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          /*------------------- Event description -------------------*/
+                          child: Text(description, style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 10.0,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black)),
+                        )
 
-                    ],
-                  ),
-                )
-              ],
-            )
+                      ],
+                    ),
+                  )
+                ],
+              )
+          )
         )
     );
   }
@@ -361,20 +364,1049 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           ),
     );
   }
-  /*
-/*---------------------------------- FUNCTION FOR NAVIGATING TO HOME WITH BOTTOM BAR ICON ----------------------------------*/
-  void pushHomepage(){
+
+/*---------------------------------- FUNCTION FOR NAVIGATING TO EVENT DETAILS  ----------------------------------*/
+  void pushEventDetails(int id){
+    bool isFavorite = _favorites.contains(id);
+
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-          builder: (BuildContext context) {
-            return HomePage();
+        // Add lines from here...
+        builder: (BuildContext context) {
+          if (id == 1){
+            return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.orange,
+                elevation: 9.0,
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                title: Text('Event details',
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 20.0,
+                        color: Colors.white)),
+              ),
+
+              body: ListView(
+                //padding: EdgeInsets.all(10.0),
+                children: <Widget>[
+
+                  Expanded(
+                      child: Container(
+                        //fit: BoxFit.contain,
+                        alignment: Alignment.centerLeft,
+                        child: Image.asset('assets/listen_banner.png'),
+                      )
+                  ),
+                  Expanded(
+                    child:
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child:
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Listen (2020)",
+                                  style: TextStyle(fontFamily: 'Roboto', fontSize: 20, color: Colors.deepOrange),),
+
+                                IconButton(
+                                  icon: Icon(
+                                    /*------------------- Favorite icon, with color and fill check -------------------*/
+                                    isFavorite ? Icons.favorite : Icons.favorite_border,
+                                    color: isFavorite ? Colors.red : null,
+                                  ),
+                                  onPressed: (){
+                                    setState(() {
+                                      if(isFavorite){
+                                        _favorites.remove(id);
+                                      } else {
+                                        _favorites.add(id);
+                                      }
+                                    });
+                                  },
+                                )
+                              ],),
+                          ),
+
+                          Wrap(
+                            direction: Axis.horizontal,
+                            children: [
+                              Padding(padding: EdgeInsets.only(left: 20, right: 15), child:
+                              Text("M14. In the suburbs of London, Bela and Jota face serious challenges when Social Services raise doubts regarding the safety of their children. ",
+                                  style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black))),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget> [
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child: Icon(Icons.place, color: Colors.black),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child:
+                                Text("Rua Pêro da Covilhã, 36 1400-296 Lisboa",
+                                    style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget> [
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child: Icon(Icons.access_time, color: Colors.black),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child:
+                                Text("December 7, 18:00, 20:00, 22:00, 24:00",
+                                    style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget> [
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child: Icon(Icons.call, color: Colors.black),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child:
+                                Text("cinemas.nos.pt",
+                                    style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget> [
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child: Icon(Icons.shopping_cart, color: Colors.black),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child:
+                                Text("8€",
+                                    style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                              )
+                            ],
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:[
+                                Padding(
+                                    padding: EdgeInsets.only(top:15, left: 15),
+                                    child:
+                                    InkWell(
+                                      onTap: () {},
+                                      child:
+                                      Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            borderRadius: BorderRadiusDirectional.all(
+                                                Radius.circular(25.0)),
+                                            color: Colors.orange,
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.only(top: 10, bottom: 10, left: 40, right: 40),
+                                            child: Text('   See reviews   ', style: TextStyle(
+                                                fontFamily: 'Roboto',
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                                decoration: TextDecoration.none)),
+                                          )
+                                      ),
+                                    )
+                                )
+                              ]
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:[
+                                Padding(
+                                    padding: EdgeInsets.only(top:15, left: 15),
+                                    child:
+                                    InkWell(
+                                      onTap: () {},
+                                      child:
+                                      Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            borderRadius: BorderRadiusDirectional.all(
+                                                Radius.circular(25.0)),
+                                            color: Colors.orange,
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.only(top: 10, bottom: 10, left: 35, right: 35),
+                                            child: Text('Purchase a ticket', style: TextStyle(
+                                                fontFamily: 'Roboto',
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                                decoration: TextDecoration.none)),
+                                          )
+                                      ),
+                                    )
+                                )
+                              ]
+                          ),
+
+                        ]
+                    ),
+                  )
+                ],
+              ),
+              floatingActionButton: FloatingActionButton(onPressed: () {},
+                backgroundColor: Colors.deepOrange,
+                child: Image.asset('assets/groups.png', height: 35, width: 35,),
+              ),
+              floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
+
+            );
           }
+          if (id == 2){
+            return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.orange,
+                elevation: 9.0,
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                title: Text('Event details',
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 20.0,
+                        color: Colors.white)),
+              ),
+
+              body: ListView(
+                //padding: EdgeInsets.all(10.0),
+                children: <Widget>[
+
+                  Expanded(
+                      child: Container(
+                        //fit: BoxFit.contain,
+                        alignment: Alignment.centerLeft,
+                        child: Image.asset('assets/nos_alive_banner.png'),
+                      )
+                  ),
+                  Expanded(
+                    child:
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child:
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("NOS Alive",
+                                  style: TextStyle(fontFamily: 'Roboto', fontSize: 20, color: Colors.deepOrange),),
+
+                                IconButton(
+                                  icon: Icon(
+                                    /*------------------- Favorite icon, with color and fill check -------------------*/
+                                    isFavorite ? Icons.favorite : Icons.favorite_border,
+                                    color: isFavorite ? Colors.red : null,
+                                  ),
+                                  onPressed: (){
+                                    setState(() {
+                                      if(isFavorite){
+                                        _favorites.remove(id);
+                                      } else {
+                                        _favorites.add(id);
+                                      }
+                                    });
+                                  },
+                                )
+                              ],),
+                          ),
+
+                          Wrap(
+                            direction: Axis.horizontal,
+                            children: [
+                              Padding(padding: EdgeInsets.only(left: 20, right: 15), child:
+                              Text("A music and arts festival which takes place in the Algés riverside in Oerias.  Guests include Kendrick Lamar, Taylor Swift, Billie Eilish. Khalid, Alt-J and the Lumineers",
+                                  style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black))),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget> [
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child: Icon(Icons.place, color: Colors.black),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child:
+                                Text("Rua Pêro da Covilhã, 36 1400-296 Lisboa",
+                                    style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget> [
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child: Icon(Icons.access_time, color: Colors.black),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child:
+                                Text("December 8, 17:00 - 24:00",
+                                    style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget> [
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child: Icon(Icons.call, color: Colors.black),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child:
+                                Text("213 933 770",
+                                    style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget> [
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child: Icon(Icons.shopping_cart, color: Colors.black),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child:
+                                Text("Diary 68€, 3-Day Pass 159€, 4-Day Pass 189€",
+                                    style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                              )
+                            ],
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:[
+                                Padding(
+                                    padding: EdgeInsets.only(top:15, left: 15),
+                                    child:
+                                    InkWell(
+                                      onTap: () {},
+                                      child:
+                                      Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            borderRadius: BorderRadiusDirectional.all(
+                                                Radius.circular(25.0)),
+                                            color: Colors.orange,
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.only(top: 10, bottom: 10, left: 40, right: 40),
+                                            child: Text('   See reviews   ', style: TextStyle(
+                                                fontFamily: 'Roboto',
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                                decoration: TextDecoration.none)),
+                                          )
+                                      ),
+                                    )
+                                )
+                              ]
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:[
+                                Padding(
+                                    padding: EdgeInsets.only(top:15, left: 15),
+                                    child:
+                                    InkWell(
+                                      onTap: () {},
+                                      child:
+                                      Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            borderRadius: BorderRadiusDirectional.all(
+                                                Radius.circular(25.0)),
+                                            color: Colors.orange,
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.only(top: 10, bottom: 10, left: 35, right: 35),
+                                            child: Text('Purchase a ticket', style: TextStyle(
+                                                fontFamily: 'Roboto',
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                                decoration: TextDecoration.none)),
+                                          )
+                                      ),
+                                    )
+                                )
+                              ]
+                          ),
+
+                        ]
+                    ),
+                  )
+                ],
+              ),
+              floatingActionButton: FloatingActionButton(onPressed: () {},
+                backgroundColor: Colors.deepOrange,
+                child: Image.asset('assets/groups.png', height: 35, width: 35,),
+              ),
+              floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
+
+            );
+          }
+          if (id == 3){
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.orange,
+              elevation: 9.0,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.white),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              title: Text('Event details',
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 20.0,
+                      color: Colors.white)),
+            ),
+
+            body: ListView(
+              //padding: EdgeInsets.all(10.0),
+              children: <Widget>[
+
+                Expanded(
+                    child: Container(
+                      //fit: BoxFit.contain,
+                      alignment: Alignment.centerLeft,
+                      child: Image.asset('assets/pi100pe_banner.png'),
+                    )
+                ),
+                Expanded(
+                  child:
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(20.0),
+                          child:
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Pi 100 Pé",
+                                style: TextStyle(fontFamily: 'Roboto', fontSize: 20, color: Colors.deepOrange),),
+
+                              IconButton(
+                                icon: Icon(
+                                  /*------------------- Favorite icon, with color and fill check -------------------*/
+                                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                                  color: isFavorite ? Colors.red : null,
+                                ),
+                                onPressed: (){
+                                  setState(() {
+                                    if(isFavorite){
+                                      _favorites.remove(id);
+                                    } else {
+                                      _favorites.add(id);
+                                    }
+                                  });
+                                },
+                              )
+                            ],),
+                        ),
+
+                        Wrap(
+                          direction: Axis.horizontal,
+                          children: [
+                            Padding(padding: EdgeInsets.only(left: 20, right: 15), child:
+                            Text("M06. Comedy show by Fernando Rocha. Super Bock Arena Campo Pequeno. Tickets available everywhere",
+                                style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black))),
+                          ],
+                        ),
+                        Row(
+                          children: <Widget> [
+                            Padding(
+                              padding: EdgeInsets.only(left: 15, top: 15),
+                              child: Icon(Icons.place, color: Colors.black),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 15, top: 15),
+                              child:
+                              Text("Pavilhão Rosa Mota",
+                                  style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: <Widget> [
+                            Padding(
+                              padding: EdgeInsets.only(left: 15, top: 15),
+                              child: Icon(Icons.access_time, color: Colors.black),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 15, top: 15),
+                              child:
+                              Text("December 7, 19, 22:00",
+                                  style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: <Widget> [
+                            Padding(
+                              padding: EdgeInsets.only(left: 15, top: 15),
+                              child: Icon(Icons.call, color: Colors.black),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 15, top: 15),
+                              child:
+                              Text("facebook.com/100peoficial",
+                                  style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: <Widget> [
+                            Padding(
+                              padding: EdgeInsets.only(left: 15, top: 15),
+                              child: Icon(Icons.shopping_cart, color: Colors.black),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 15, top: 15),
+                              child:
+                              Text("22€",
+                                  style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                            )
+                          ],
+                        ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:[
+                              Padding(
+                                  padding: EdgeInsets.only(top:15, left: 15),
+                                  child:
+                                  InkWell(
+                                    onTap: () {},
+                                    child:
+                                    Container(
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.rectangle,
+                                          borderRadius: BorderRadiusDirectional.all(
+                                              Radius.circular(25.0)),
+                                          color: Colors.orange,
+                                        ),
+                                        child: Padding(
+                                          padding: EdgeInsets.only(top: 10, bottom: 10, left: 40, right: 40),
+                                          child: Text('   See reviews   ', style: TextStyle(
+                                              fontFamily: 'Roboto',
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                              decoration: TextDecoration.none)),
+                                        )
+                                    ),
+                                  )
+                              )
+                            ]
+                        ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:[
+                              Padding(
+                                  padding: EdgeInsets.only(top:15, left: 15),
+                                  child:
+                                  InkWell(
+                                    onTap: () {},
+                                    child:
+                                    Container(
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.rectangle,
+                                          borderRadius: BorderRadiusDirectional.all(
+                                              Radius.circular(25.0)),
+                                          color: Colors.orange,
+                                        ),
+                                        child: Padding(
+                                          padding: EdgeInsets.only(top: 10, bottom: 10, left: 35, right: 35),
+                                          child: Text('Purchase a ticket', style: TextStyle(
+                                              fontFamily: 'Roboto',
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                              decoration: TextDecoration.none)),
+                                        )
+                                    ),
+                                  )
+                              )
+                            ]
+                        ),
+
+                      ]
+                  ),
+                )
+              ],
+            ),
+            floatingActionButton: FloatingActionButton(onPressed: () {},
+              backgroundColor: Colors.deepOrange,
+              child: Image.asset('assets/groups.png', height: 35, width: 35,),
+            ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
+
+          );
+        }
+            if (id == 4){
+              return Scaffold(
+                appBar: AppBar(
+                  backgroundColor: Colors.orange,
+                  elevation: 9.0,
+                  leading: IconButton(
+                    icon: Icon(Icons.arrow_back, color: Colors.white),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  title: Text('Event details',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 20.0,
+                          color: Colors.white)),
+                ),
+
+                body: ListView(
+                  //padding: EdgeInsets.all(10.0),
+                    children: <Widget>[
+
+                      Expanded(
+                          child: Container(
+                            //fit: BoxFit.contain,
+                            alignment: Alignment.centerLeft,
+                            child: Image.asset('assets/berardo_banner.png'),
+                          )
+                      ),
+                      Expanded(
+                        child:
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                                  Padding(
+                                  padding: EdgeInsets.all(20.0),
+                                  child:
+                                  Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Primeiro Modernismo às Novas\nVanguardas do Século XX",
+                                        style: TextStyle(fontFamily: 'Roboto', fontSize: 20, color: Colors.deepOrange),),
+
+                                    IconButton(
+                                      icon: Icon(
+                                        /*------------------- Favorite icon, with color and fill check -------------------*/
+                                        isFavorite ? Icons.favorite : Icons.favorite_border,
+                                        color: isFavorite ? Colors.red : null,
+                                      ),
+                                      onPressed: (){
+                                        setState(() {
+                                          if(isFavorite){
+                                            _favorites.remove(id);
+                                          } else {
+                                            _favorites.add(id);
+                                          }
+                                        });
+                                      },
+                                    )
+                                  ],),
+                                ),
+
+                                Wrap(
+                                  direction: Axis.horizontal,
+                                  children: [
+                                    Padding(padding: EdgeInsets.only(left: 20, right: 15), child:
+                                    Text("The Berardo Collection brings together a remarkable of works that marked the history of art of the twentieth century",
+                                        style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black))),
+                                   ],
+                                ),
+                              Row(
+                                children: <Widget> [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 15, top: 15),
+                                    child: Icon(Icons.place, color: Colors.black),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 15, top: 15),
+                                    child:
+                                    Text("Praça do Império 1449-003 Lisboa",
+                                    style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: <Widget> [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 15, top: 15),
+                                    child: Icon(Icons.access_time, color: Colors.black),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 15, top: 15),
+                                    child:
+                                    Text("Everyday, 10:00 - 19:00",
+                                        style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: <Widget> [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 15, top: 15),
+                                    child: Icon(Icons.call, color: Colors.black),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 15, top: 15),
+                                    child:
+                                    Text("21 361 287 8",
+                                        style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: <Widget> [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 15, top: 15),
+                                    child: Icon(Icons.shopping_cart, color: Colors.black),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 15, top: 15),
+                                    child:
+                                    Text("18€",
+                                        style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                children:[
+                                  Padding(
+                                    padding: EdgeInsets.only(top:15, left: 15),
+                                    child:
+                                      InkWell(
+                                      onTap: () {},
+                                      child:
+                                          Container(
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.rectangle,
+                                                borderRadius: BorderRadiusDirectional.all(
+                                                    Radius.circular(25.0)),
+                                                color: Colors.orange,
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsets.only(top: 10, bottom: 10, left: 40, right: 40),
+                                                child: Text('   See reviews   ', style: TextStyle(
+                                                    fontFamily: 'Roboto',
+                                                    fontSize: 18.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    decoration: TextDecoration.none)),
+                                              )
+                                          ),
+                                      )
+                                  )
+                                ]
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                  children:[
+                                    Padding(
+                                      padding: EdgeInsets.only(top:15, left: 15),
+                                      child:
+                                      InkWell(
+                                        onTap: () {},
+                                        child:
+                                          Container(
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.rectangle,
+                                                borderRadius: BorderRadiusDirectional.all(
+                                                    Radius.circular(25.0)),
+                                                color: Colors.orange,
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsets.only(top: 10, bottom: 10, left: 35, right: 35),
+                                                child: Text('Purchase a ticket', style: TextStyle(
+                                                    fontFamily: 'Roboto',
+                                                    fontSize: 18.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    decoration: TextDecoration.none)),
+                                              )
+                                        ),
+                                      )
+                                    )
+                                  ]
+                              ),
+
+                              ]
+                           ),
+                      )
+                    ],
+                       ),
+                floatingActionButton: FloatingActionButton(onPressed: () {},
+                  backgroundColor: Colors.deepOrange,
+                  child: Image.asset('assets/groups.png', height: 35, width: 35,),
+                ),
+                floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
+
+              );
+          }
+          if (id == 5){
+            return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.orange,
+                elevation: 9.0,
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                title: Text('Event details',
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 20.0,
+                        color: Colors.white)),
+              ),
+
+              body: ListView(
+                //padding: EdgeInsets.all(10.0),
+                children: <Widget>[
+
+                  Expanded(
+                      child: Container(
+                        //fit: BoxFit.contain,
+                        alignment: Alignment.centerLeft,
+                        child: Image.asset('assets/teatro_banner.png'),
+                      )
+                  ),
+                  Expanded(
+                    child:
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child:
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Uma Mulher Não Chora",
+                                  style: TextStyle(fontFamily: 'Roboto', fontSize: 20, color: Colors.deepOrange),),
+
+                                IconButton(
+                                  icon: Icon(
+                                    /*------------------- Favorite icon, with color and fill check -------------------*/
+                                    isFavorite ? Icons.favorite : Icons.favorite_border,
+                                    color: isFavorite ? Colors.red : null,
+                                  ),
+                                  onPressed: (){
+                                    setState(() {
+                                      if(isFavorite){
+                                        _favorites.remove(id);
+                                      } else {
+                                        _favorites.add(id);
+                                      }
+                                    });
+                                  },
+                                )
+                              ],),
+                          ),
+
+                          Wrap(
+                            direction: Axis.horizontal,
+                            children: [
+                              Padding(padding: EdgeInsets.only(left: 20, right: 15), child:
+                              Text("For 80 minutes, the singers join the musical universe of Renato Júnior. Paying homage to the reality of being a woman in the twenty first century, lending their voice to eradicate violence against women.",
+                                  style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black))),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget> [
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child: Icon(Icons.place, color: Colors.black),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child:
+                                Text("Av. Frei Miguel Contreiras 52-53, Lisboa",
+                                    style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget> [
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child: Icon(Icons.access_time, color: Colors.black),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child:
+                                Text("December 7, 21:00",
+                                    style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget> [
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child: Icon(Icons.call, color: Colors.black),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child:
+                                Text("teatromariamatos.pt",
+                                    style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: <Widget> [
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child: Icon(Icons.shopping_cart, color: Colors.black),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, top: 15),
+                                child:
+                                Text("18€",
+                                    style: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black)),
+                              )
+                            ],
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:[
+                                Padding(
+                                    padding: EdgeInsets.only(top:15, left: 15),
+                                    child:
+                                    InkWell(
+                                      onTap: () {},
+                                      child:
+                                      Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            borderRadius: BorderRadiusDirectional.all(
+                                                Radius.circular(25.0)),
+                                            color: Colors.orange,
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.only(top: 10, bottom: 10, left: 40, right: 40),
+                                            child: Text('   See reviews   ', style: TextStyle(
+                                                fontFamily: 'Roboto',
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                                decoration: TextDecoration.none)),
+                                          )
+                                      ),
+                                    )
+                                )
+                              ]
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:[
+                                Padding(
+                                    padding: EdgeInsets.only(top:15, left: 15),
+                                    child:
+                                    InkWell(
+                                      onTap: () {},
+                                      child:
+                                      Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            borderRadius: BorderRadiusDirectional.all(
+                                                Radius.circular(25.0)),
+                                            color: Colors.orange,
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.only(top: 10, bottom: 10, left: 35, right: 35),
+                                            child: Text('Purchase a ticket', style: TextStyle(
+                                                fontFamily: 'Roboto',
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                                decoration: TextDecoration.none)),
+                                          )
+                                      ),
+                                    )
+                                )
+                              ]
+                          ),
+
+                        ]
+                    ),
+                  )
+                ],
+              ),
+              floatingActionButton: FloatingActionButton(onPressed: () {},
+                backgroundColor: Colors.deepOrange,
+                child: Image.asset('assets/groups.png', height: 35, width: 35,),
+              ),
+              floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
+
+            );
+          }else {
+              return Scaffold(
+                  appBar: AppBar(
+                    backgroundColor: Colors.orange,
+                    elevation: 9.0,
+                    leading: IconButton(
+                      icon: Icon(Icons.arrow_back, color: Colors.white),
+                      onPressed: () {
+                      Navigator.pop(context);
+                      },
+                    ),
+                    title: Text('Event details',
+                    style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontSize: 20.0,
+                    color: Colors.white)),
+                    ),
+              );
+            }
+        }, // ...to here.
       ),
     );
   }
 
 
-   */
 /*---------------------------------- FUNCTION FOR NAVIGATING TO FAVORITES WITH BOTTOM BAR ICON ----------------------------------*/
   void pushFavorites() {
     Navigator.of(context).push(
