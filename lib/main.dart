@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
+import './firstPage.dart';
 
 
 void main() => runApp(MyApp());
@@ -14,12 +15,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Culturally',
-      theme: ThemeData(
-        primaryColor: Colors.orange,
-      ),
-      home: HomePage(),
+      //debugShowCheckedModeBanner: false,
+      //title: 'Culturally',
+      //theme: ThemeData(
+      //  primaryColor: Colors.orange,
+      //),
+      home: FirstPage(),
     );
   }
 }
