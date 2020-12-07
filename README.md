@@ -2,6 +2,12 @@
 
 Cultural agenda that will help you find company for events.
 
+## To Run
+1) Install FLutter, using Android Studio according to this guide: https://flutter.dev/docs/get-started/install
+2) Download project source code
+3) Import the flutter project into Android Studio
+4) Using an android emulator, run main.dart
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
