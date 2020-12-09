@@ -33,6 +33,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   DateTime selectedDate = DateTime.now();
   final _favorites = Set<int>();
+  final List<String> _myMessages = [];
+  bool BeatrizFriend = false;
+  bool RodrigoFriend = false;
   OverlayEntry _overlayEntry;
   OverlayState overlayState;
   String dropdownValue = ' Alphabetical Asc.        ';
@@ -393,7 +396,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               ),
 
               body: ListView(
-                  //padding: EdgeInsets.only(top: 30.0),
+                //padding: EdgeInsets.only(top: 30.0),
                   children: <Widget>[
                     Expanded(
                         child: Container(
@@ -409,7 +412,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       children: [
                         Text("No reviews yet", style: TextStyle(fontSize: 30, color: Colors.grey, fontFamily: 'Roboto'),),
                       ],
-
                     ),
                      */
                   ]),
@@ -1853,6 +1855,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     //overlayEntry.remove();
   }
 
+
   /*---------------------------------- FUNCTIONS MATCH INTERFACE ----------------------------------*/
   Widget _buildCardForMatch(int id, String name, String description, String imagePath, String type, context) {
     final isFavorite = _favorites.contains(id);
@@ -1885,11 +1888,22 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left: 8.0,),
+                        padding: EdgeInsets.only(
+                            left: 8.0, top: 8.0, bottom: 8.0, right: 8.0),
+                        /* ------------------- Event Title -------------------*/
+                        child: Text(name, style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepOrange)),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           //crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+
                             Container(
                                 decoration: BoxDecoration(
                                     shape: BoxShape.rectangle,
@@ -1922,46 +1936,67 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                   }
                                 });
                               },
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                /*------------------- Favorite icon, with color and fill check -------------------*/
-                                Icons.six_ft_apart_rounded,
-                                color: Colors.orange,
-                              ),
-                              onPressed: pushMatchMadeScreen
                             )
+                            /*RaisedButton(
+                                onPressed: () {pushEventDetails(id);},
+                                color: Colors.orange,
+                                textColor: Colors.white,
+                                child: Padding(
+                                  padding: EdgeInsets.all(6.0),
+                                  /* ------------------- Type orange tag -------------------*/
+                                  child: Text('Info', style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontSize: 5.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white)),
+                                )
+                            )*/
+
                           ],
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                            left: 8.0, top: 8.0, bottom: 8.0, right: 8.0),
+                            left: 50.0, top: 2.0, bottom: 2.0, right: 8.0),
                         /* ------------------- Event Title -------------------*/
-                        child: Text(name, style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepOrange)),
-                      ),
-                      Container(
-                          decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadiusDirectional.all(
-                                  Radius.circular(40.0)),
-                              color: Colors.orange
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(6.0),
-                            /* ------------------- Type orange tag -------------------*/
-                            child: Text('Info', style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white)),
-                          )
-                      ),
+                        child: Row(
+                          children: [
+                            FlatButton(
+                              onPressed: () {pushEventDetails(id);},
+                              color: Colors.orange,
+                              textColor: Colors.white,
+                              child: Text('Info', style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
+                              )
 
+                        ],
+                        )
+
+                      ),
+                      Padding(
+                          padding: EdgeInsets.only(
+                              left: 50.0, top: 2.0, bottom: 2.0, right: 8.0),
+                          /* ------------------- Event Title -------------------*/
+                          child: Row(
+                            children: [
+                              FlatButton(
+                                onPressed: pushMatchMadeScreen,
+                                color: Colors.deepOrange,
+                                child: Text('MATCH', style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
+
+
+                              )
+                            ],
+                          )
+
+                      )
                     ],
                   ),
                 )
@@ -1973,15 +2008,14 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   Widget _buildMessage(int id, String name, String message, Color color, context) {
     return Padding(
-        padding: EdgeInsets.only(left: 1.0, top: 1.0, right: 1.0, bottom: 8.0),
+        padding: EdgeInsets.only(left: 10.0, top: 5.0, right: 125.0, bottom: 5.0),
         child: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
+                borderRadius: BorderRadius.circular(15.0),
                 boxShadow: [
                   BoxShadow(
                       color: Colors.white,
-                      spreadRadius: 3.0,
-                      blurRadius: 5.0)
+                      spreadRadius: 1.0)
                 ],
                 color: Colors.white),
 
@@ -1993,23 +2027,24 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      if(name != '')
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: 10.0, top: 5.0, right: 20.0, bottom: 5.0),
+                          /* ------------------- Event Title -------------------*/
+                          child: Text(name, style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: color)),
+                        ),
                       Padding(
                         padding: EdgeInsets.only(
-                            left: 2.0, top: 8.0, bottom: 8.0, right: 8.0),
-                        /* ------------------- Event Title -------------------*/
-                        child: Text(name, style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: color)),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: 8.0, top: 8.0, bottom: 8.0, right: 8.0),
+                            left: 10.0, top: 5.0, right: 20.0, bottom: 5.0),
                         child: Text(message, style: TextStyle(
                                 fontFamily: 'Roboto',
-                                fontSize: 10.0,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.normal,
                                 color: Colors.black)),
                       )
 
@@ -2022,8 +2057,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     );
   }
 
-  Widget _buildCardForFriend(int id, String name, bool friend, context) {
-    final isFavorite = _favorites.contains(id);
+  Widget _buildCardForFriend(int id, String name, bool friend, String image, context) {
+
     return Padding(
         padding: EdgeInsets.only(left: 1.0, top: 1.0, right: 1.0, bottom: 8.0),
         child: Container(
@@ -2040,31 +2075,31 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             child: Row(
               children: <Widget>[
                 /*------------------- Info on the right -------------------*/
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if(friend)
-                              Text(name,
-                                  style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontSize: 18.0,
-                                      color: Colors.orange))
-                            else if(!friend)
-                              Text(name,
-                                  style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontSize: 18.0,
-                                      color: Colors.black)),
 
-                            Container(
+                Image.asset(image, height: 100, width: 100),
+
+                Column(
+
+                  children: [
+
+                      Padding(
+
+                          padding: EdgeInsets.only(left: 10.0, top: 10.0, bottom: 10.0),
+
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10.0, top: 5.0, bottom: 5.0),
+                                child: Text(name,
+                                    style: TextStyle(
+                                        fontFamily: 'Roboto',
+                                        fontSize: 18.0,
+                                        color: friend ? Colors.orange : Colors.black))
+
+                              )]
+                            )),
+
+                      Container(
                                 decoration: BoxDecoration(
                                     shape: BoxShape.rectangle,
                                     borderRadius: BorderRadiusDirectional.all(
@@ -2076,40 +2111,57 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                   /* ------------------- Type orange tag -------------------*/
                                   child: Text('See profile', style: TextStyle(
                                       fontFamily: 'Roboto',
-                                      fontSize: 10.0,
+                                      fontSize: 15.0,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white)),
                                 )
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                /*------------------- Favorite icon, with color and fill check -------------------*/
-                                friend ? Icons.group : Icons.group_add,
-                                color: friend ? Colors.orange : Colors.black,
-                              ),
-                            ),
-                            if(friend)
-                              Text('Friend',
-                                  style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontSize: 8.0,
-                                      color: Colors.orange))
-                            else if(!friend)
-                              Text('Add friend',
-                                  style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontSize: 8.0,
-                                      color: Colors.black)),
+                      ) ] ),
+                Column(
+                  children: [
+                    IconButton(
+                                  icon: Icon(
+                                    /*------------------- Favorite icon, with color and fill check -------------------*/
+                                    friend ? Icons.group : Icons.group_add,
+                                    color: friend ? Colors.orange : Colors.black,
+                                    size: 35.0
+                                  ),
+                      onPressed: () { addFriend(id);  }
+                    ),
+                              Text( friend ? 'Friend' : 'Add Friend',
+                                    style: TextStyle(
+                                        fontFamily: 'Roboto',
+                                        fontSize: 12.0,
+                                        color: friend ? Colors.orange : Colors.black))
+
                           ],
                         ),
-                      ),
                     ],
-                  ),
-                )
-              ],
-            )
-        )
+                  )
+    )
     );
+  }
+
+  Widget _writeTextBar(int id) {
+    return TextField(
+        textAlign: TextAlign.left,
+        textAlignVertical: TextAlignVertical.center,
+        onSubmitted: (String value) async {
+          sendMessage(value);
+        },
+        obscureText: false,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          //border: round,
+          labelText: 'Type a message' ),
+      cursorWidth: 7.0,
+      cursorHeight: 7.0
+    );
+  }
+
+  void addFriend(int id) {
+    id == 1 ?  BeatrizFriend = !BeatrizFriend  :  RodrigoFriend = !RodrigoFriend;
+    pushAddFriendScreen();
   }
 
   void pushMatchScreenInterests() {
@@ -2128,83 +2180,76 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   Navigator.pop(context);
                 },
               ),
-              title: Text('Random Match Made!',
+              title: Text('Match',
                   style: TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 20.0,
                       color: Colors.white)),
             ),
             body: ListView(
-                children:[
-                      Expanded(
-                        child: Container(
-                        //fit: BoxFit.contain,
-                        alignment: Alignment.centerLeft,
-                        child: Image.asset('assets/match.PNG'),
-                      )),
-                ]
-/*
+
                 padding: EdgeInsets.all(10.0),
-                children: [
-                  /*Hard coded favorites check*/
-                  Text('Events found based on your interests',
-                      style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: 15.0,
-                          color: Colors.black)),
-                  if(_favorites.contains(1))
-                    _buildCardForMatch(
-                        1,
-                        'Listen (2020)',
-                        'M14\nGenre: Drama \nDirector: Ana Rocha\n In the suburbs of London, Bela and Jota face serious challenges when Social Services raise doubts regarding the safety of their children. ',
-                        'assets/listen.png',
-                        'Cinema',
-                        context),
-                  if(_favorites.contains(2))
-                    _buildCardForMatch(
-                        2,
-                        'NOS Alive',
-                        'A music and arts festival which takes place in the Algés riverside in Oerias.\n\n Guests include Kendrick Lamar, Taylor Swift, Billie Eilish. Khalid, Alt-J and the Lumineers.\n\nCome have the time of your life!',
-                        'assets/nos_alive.png',
-                        'Concert',
-                        context),
-                  if(_favorites.contains(3))
-                    _buildCardForMatch(
-                        3,
-                        'Pi 100 Pé',
-                        'M06\n\nComedy show by Fernando Rocha.\nSit back, relax and have a laugh!\n\nSuper Bock Arena\n Campo Pequeno\nTickets available everywhere',
-                        'assets/pi100pe.png',
-                        'Comedy',
-                        context),
-                  if(_favorites.contains(4))
-                    _buildCardForMatch(
-                        4,
-                        'Primeiro Modernismo às Novas Vanguardas do Século XX',
-                        'The Berardo Collection brings together a remarkable of works that marked the history of art of the twentieth century',
-                        'assets/berardo.png',
-                        'Museum',
-                        context),
-                  if(_favorites.contains(5))
-                    _buildCardForMatch(
-                        5,
-                        'Uma Mulher Não Chora',
-                        'M06\nMusical\nFor 80 minutes, the singers join the musical universe of Renato Júnior. Paying homage to the reality of being a woman in the twenty first century, lending their voice to eradicate violence against women.',
-                        'assets/teatro.png',
-                        'Theater',
-                        context),
-                ]
-            ),*/
+                  children: [
+                    /*Hard coded favorites check*/
+                    Text('Events found based on your interests',
+                        style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontSize: 15.0,
+                            color: Colors.black)),
+                    if(_favorites.contains(1))
+                      _buildCardForMatch(
+                          1,
+                          'Listen (2020)',
+                          'M14\nGenre: Drama \nDirector: Ana Rocha\n In the suburbs of London, Bela and Jota face serious challenges when Social Services raise doubts regarding the safety of their children. ',
+                          'assets/listen.png',
+                          'Cinema',
+                          context),
+                    if(_favorites.contains(2))
+                      _buildCardForMatch(
+                          2,
+                          'NOS Alive',
+                          'A music and arts festival which takes place in the Algés riverside in Oerias.\n\n Guests include Kendrick Lamar, Taylor Swift, Billie Eilish. Khalid, Alt-J and the Lumineers.\n\nCome have the time of your life!',
+                          'assets/nos_alive.png',
+                          'Concert',
+                          context),
+                    if(_favorites.contains(3))
+                      _buildCardForMatch(
+                          3,
+                          'Pi 100 Pé',
+                          'M06\n\nComedy show by Fernando Rocha.\nSit back, relax and have a laugh!\n\nSuper Bock Arena\n Campo Pequeno\nTickets available everywhere',
+                          'assets/pi100pe.png',
+                          'Comedy',
+                          context),
+                    if(_favorites.contains(4))
+                      _buildCardForMatch(
+                          4,
+                          'Primeiro Modernismo às Novas Vanguardas do Século XX',
+                          'The Berardo Collection brings together a remarkable of works that marked the history of art of the twentieth century',
+                          'assets/berardo.png',
+                          'Museum',
+                          context),
+                    if(_favorites.contains(5))
+                      _buildCardForMatch(
+                          5,
+                          'Uma Mulher Não Chora',
+                          'M06\nMusical\nFor 80 minutes, the singers join the musical universe of Renato Júnior. Paying homage to the reality of being a woman in the twenty first century, lending their voice to eradicate violence against women.',
+                          'assets/teatro.png',
+                          'Theater',
+                          context),
+                  ]
+              ),
+
+
+            floatingActionButton: FloatingActionButton(onPressed: pushMatchScreenInterests,
+              backgroundColor: Colors.deepOrange,
+              child: Image.asset('assets/groups.png', height: 35, width: 35,),
             ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
-            floatingActionButton: FloatingActionButton(onPressed: pushChat,
-              backgroundColor: Colors.white,
-              child: Icon(Icons.forum, size: 35, color: Colors.deepOrange),
-            ),
-            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+            bottomNavigationBar: _bottomAppBar(),
 
-            //bottomNavigationBar: _bottomAppBar(),
 
-          );
+            );
         }, // ...to here.
       ),
     );
@@ -2261,36 +2306,70 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           return Scaffold(
             backgroundColor: Colors.orange,
             appBar: AppBar(
-              elevation: 9.0,
+              elevation: 50.0,
               leading: IconButton(
                 icon: Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
-              title: Text('Match Made',
+              title: Text('Successfully matched with random people',
                   style: TextStyle(
                       fontFamily: 'Roboto',
-                      fontSize: 20.0,
+                      fontSize: 15.0,
                       color: Colors.white)),
             ),
-            body: ListView(
-                padding: EdgeInsets.all(10.0),
-                children: [
-                  /*People Matched*/
-                  Image.asset('assets/joaquim.png', height: 60, width: 60),
-                  Image.asset('assets/beatriz.png', height: 60, width: 60),
-                  Image.asset('assets/rodrigo.png', height: 60, width: 60),
-                  IconButton(
-                      icon: Icon(
-                        /*------------------- Favorite icon, with color and fill check -------------------*/
-                        Icons.chat,
-                        color: Colors.white,
-                      ),
-                      onPressed: pushChat
-                  )
-                ]
-            ),
+            body: Padding(
+
+                    padding: EdgeInsets.only(top: 30.0, left: 10.0, bottom: 30.0, right: 5.0),
+
+                    /* ------------------- Event Title -------------------*/
+                    child:
+
+                        Column(
+
+                          crossAxisAlignment: CrossAxisAlignment.center,
+
+                          children: [
+
+                            Padding(
+                              padding: EdgeInsets.only(left: 5.0, top: 50.0, bottom: 50.0),
+                              child: Text('MATCH\nMADE!',
+                                  style: TextStyle(
+                                      fontFamily: 'Columnist',
+                                      fontSize: 70.0,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center)),
+
+                            Row(
+
+                                  children: [
+
+                                    /*People Matched*/
+                                    Padding(
+                                        padding: EdgeInsets.only(left: 20.0, top: 30.0, bottom: 40.0),
+                                        child: Image.asset('assets/joaquim.png', height: 100, width: 100)
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(left: 10.0, top: 30.0, bottom: 40.0),
+                                        child: Image.asset('assets/beatriz.png', height: 100, width: 100)
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(left: 10.0, top: 30.0, bottom: 40.0),
+                                        child: Image.asset('assets/rodrigo.png', height: 100, width: 100)
+                                    ),
+
+                                  ],
+                        )
+              ]
+                        )
+                ),
+                floatingActionButton: FloatingActionButton(onPressed: pushChat,
+                  backgroundColor: Colors.white,
+                  child: Icon(Icons.forum, size: 35, color: Colors.deepOrange),
+                ),
+                floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat
           );
         }, // ...to here.
       ),
@@ -2304,7 +2383,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         builder: (BuildContext context) {
 
           return Scaffold(
-            backgroundColor: Colors.orange,
+            backgroundColor: Colors.grey[50],
             appBar: AppBar(
               backgroundColor: Colors.orange,
               elevation: 9.0,
@@ -2319,65 +2398,51 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       fontFamily: 'Roboto',
                       fontSize: 20.0,
                       color: Colors.white)),
+              actions: <Widget>[
+                IconButton(
+                    icon: Icon( Icons.group_add, color: Colors.white ),
+                    onPressed: pushAddFriendScreen
+                ),
+              ]
             ),
             body: ListView(
-                //padding: EdgeInsets.all(10.0),
+
+                padding: EdgeInsets.all(10.0),
                 children: [
-                  Expanded(
-                      child: Container(
-                        //fit: BoxFit.contain,
-                        alignment: Alignment.centerLeft,
-                        child: Image.asset('assets/chat.PNG'),
-                      )
-                  ),
-                  /*
+
                   /*Messages*/
                   _buildMessage(
                         1,
-                        'Beatriz',
+                        'Rodrigo Costa',
                         'Mal posso esperar por este dia!',
                         Colors.green,
                         context),
                   _buildMessage(
                       2,
-                      'Rodrigo',
+                      '',
+                      'Queria bué ir a isto, mas não tinha ninguém com quem ir...',
+                      Colors.green,
+                      context),
+                  _buildMessage(
+                      3,
+                      'Beatriz Carvalho',
                       'A que horas combinamos encontrar-nos?',
                       Colors.blue,
                       context),
-                  Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadiusDirectional.all(
-                              Radius.circular(40.0)),
-                          color: Colors.white
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(6.0),
-                        /* ------------------- Type orange tag -------------------*/
-                        child: Text('Write message', style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 10.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black)),
-                      )
-                  ),
-                  IconButton(
-                      icon: Icon(
-                        /*------------------- Favorite icon, with color and fill check -------------------*/
-                        Icons.group_add,
-                        color: Colors.white,
-                      ),
-                      onPressed: pushAddFriendScreen
-                  ),
-                  Text('Add Friend', style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: 10.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black)),
+                  for(int i = 0; i < _myMessages.length; i++)
+                    _buildMessage(
+                        4 + i,
+                        i == 0 ? 'Me' : '',
+                        _myMessages[i],
+                        Colors.deepOrange,
+                        context),
 
-                   */
-                ]
+                  Padding(
+                      padding: EdgeInsets.only(top: 300),
+                      child: _writeTextBar(1)
+                  )
 
+                ],
             ),
 
             floatingActionButton: FloatingActionButton(onPressed: pushMatchScreenInterests,
@@ -2385,13 +2450,17 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               child: Image.asset('assets/groups.png', height: 35, width: 35,),
             ),
             floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-
             bottomNavigationBar: _bottomAppBar(),
 
           );
         }, // ...to here.
       ),
     );
+  }
+
+  void sendMessage(String message) {
+    _myMessages.add(message);
+    pushChat();
   }
 
   void pushAddFriendScreen() {
@@ -2411,7 +2480,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   Navigator.pop(context);
                 },
               ),
-              title: Text('Match',
+              title: Text('Add Friend',
                   style: TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 20.0,
@@ -2423,12 +2492,14 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                  _buildCardForFriend(
                         1,
                         'Beatriz Carvalho, 21',
-                        true,
+                        BeatrizFriend,
+                        'assets/beatriz.png',
                         context),
                   _buildCardForFriend(
                       2,
                       'Rodrigo Costa, 24',
-                      false,
+                      RodrigoFriend,
+                      'assets/rodrigo.png',
                       context),
                 ]
             ),
@@ -2445,6 +2516,5 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       ),
     );
   }
-
 
 }
