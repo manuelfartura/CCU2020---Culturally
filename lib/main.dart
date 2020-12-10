@@ -2309,8 +2309,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                     fontSize: 15.0,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white)),
-
-
                               )
                             ],
                           )
@@ -2413,51 +2411,59 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                     style: TextStyle(
                                         fontFamily: 'Roboto',
                                         fontSize: 18.0,
-                                        color: friend ? Colors.orange : Colors.black))
+                                        color: friend ? Colors.deepOrange : Colors.black))
 
                               )]
                             )),
 
                       Container(
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadiusDirectional.all(
-                                        Radius.circular(20.0)),
-                                    color: Colors.orange
-                                ),
+
                                 child: InkWell(
                                     onTap: () { pushProfile(id, name, birthday,
                                 email, insta, phone,
                                 about,
                                 image); },
                                     child: Padding(
-                                      padding: EdgeInsets.all(6.0),
+                                      padding: id == 2 ? EdgeInsets.all(6.0) : EdgeInsets.only(left: 26.0, top: 6.0, right: 6.0, bottom: 6.0),
                                   /* ------------------- Type orange tag -------------------*/
-                                      child: Text('See profile', style: TextStyle(
-                                        fontFamily: 'Roboto',
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white)),
+                                      child: FlatButton(
+                                        onPressed: () { pushProfile(id, name, birthday,
+                                            email, insta, phone,
+                                            about,
+                                            image); },
+                                        color: Colors.deepOrange,
+                                        child: Text('See profile', style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white)),
+                                      )
                                 )
     ) ) ] ),
                 Column(
                   children: [
-                    IconButton(
+                    Padding(
+                      padding: id == 2 ? EdgeInsets.only(left: 10.0) : EdgeInsets.only(left: 30.0),
+                    child: IconButton(
                                   icon: Icon(
                                     /*------------------- Favorite icon, with color and fill check -------------------*/
                                     friend ? Icons.group : Icons.group_add,
-                                    color: friend ? Colors.orange : Colors.black,
+                                    color: friend ? Colors.deepOrange : Colors.black,
                                     size: 35.0
                                   ),
                       onPressed: () { addFriend(id);  }
                     ),
-                              Text( friend ? 'Friend' : 'Add Friend',
+                    ),
+                    Padding(
+                      padding: id == 2 ? EdgeInsets.only(left: 10.0) : EdgeInsets.only(left: 30.0),
+                      child: Text( friend ? 'Friend' : 'Add Friend',
                                     style: TextStyle(
                                         fontFamily: 'Roboto',
                                         fontSize: 12.0,
-                                        color: friend ? Colors.orange : Colors.black))
+                                        color: friend ? Colors.deepOrange : Colors.black))
 
-                          ],
+                    )
+                      ],
                         ),
                     ],
                   )
@@ -2502,16 +2508,17 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 child: Row(
                   children: <Widget>[
                     /*------------------- Image on the left -------------------*/
-                    Expanded(
-                        child: Icon(Icons.group, color: Colors.deepOrange)),
+                    Padding(
+                      padding: EdgeInsets.only(left: 30.0),
+                      child: Icon(Icons.group, color: Colors.deepOrange)
+                    ),
                     /*------------------- Info on the right -------------------*/
-                    Expanded(
-                      child: Column(
+                    Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(left: 3.0),
+                            padding: EdgeInsets.only(left: 20.0, top: 8.0),
                             child: Text('You, Beatriz Carvalho and Rodrigo Costa', style: TextStyle(
                                           fontFamily: 'Roboto',
                                           fontSize: 14.0,
@@ -2520,7 +2527,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                           ),
                           Padding(
                             padding: EdgeInsets.only(
-                                left: 8.0, top: 8.0, bottom: 8.0, right: 8.0),
+                                left: 20.0, top: 8.0, bottom: 8.0, right: 8.0),
                             /* ------------------- Event Title -------------------*/
                             child: Text('Last message today', style: TextStyle(
                                 fontFamily: 'Roboto',
@@ -2529,7 +2536,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                           )
                         ],
                       ),
-                    )
                   ],
                 )
             )
@@ -2538,7 +2544,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   }
 
   void addFriend(int id) {
-    id == 1 ?  BeatrizFriend = !BeatrizFriend  :  RodrigoFriend = !RodrigoFriend;
+    id == 2 ?  BeatrizFriend = !BeatrizFriend  :  RodrigoFriend = !RodrigoFriend;
     pushAddFriendScreen();
   }
 
