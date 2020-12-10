@@ -2858,56 +2858,39 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           return Scaffold(
             backgroundColor: Colors.orange,
             appBar: AppBar(
-              elevation: 50.0,
+              elevation: .0,
               leading: IconButton(
                 icon: Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
-              title: Text('Successfully matched with random people',
+              title: Text('Successful match!',
                   style: TextStyle(
                       fontFamily: 'Roboto',
-                      fontSize: 15.0,
+                      fontSize: 20.0,
                       color: Colors.white)),
             ),
-            body: Padding(
-                    padding: EdgeInsets.only(top: 30.0, left: 10.0, bottom: 30.0, right: 5.0),
-                    /* ------------------- Event Title -------------------*/
-                    child:
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 5.0, top: 50.0, bottom: 50.0),
-                              child: Text('MATCH\nMADE!',
-                                  style: TextStyle(
-                                      fontFamily: 'Guaraldo',
-                                      fontSize: 70.0,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.center)),
-                            Row(
-                                  children: [
-                                    /*People Matched*/
-                                    Padding(
-                                        padding: EdgeInsets.only(left: 20.0, top: 30.0, bottom: 40.0),
-                                        child: Image.asset('assets/joaquim.png', height: 100, width: 100)
-                                    ),
-                                    Padding(
-                                        padding: EdgeInsets.only(left: 10.0, top: 30.0, bottom: 40.0),
-                                        child: Image.asset('assets/beatriz.png', height: 100, width: 100)
-                                    ),
-                                    Padding(
-                                        padding: EdgeInsets.only(left: 10.0, top: 30.0, bottom: 40.0),
-                                        child: Image.asset('assets/rodrigo.png', height: 100, width: 100)
-                                    ),
-
-                                  ],
-                        )
-              ]
-                        )
-                ),
+            body: ListView(
+              //padding: EdgeInsets.only(top: 30.0),
+                children: <Widget>[
+                  Expanded(
+                      child: Container(
+                        //fit: BoxFit.contain,
+                        alignment: Alignment.centerLeft,
+                        child: Image.asset('assets/match.PNG'),
+                      )
+                  ),
+                  /*
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text("No reviews yet", style: TextStyle(fontSize: 30, color: Colors.grey, fontFamily: 'Roboto'),),
+                      ],
+                    ),
+                     */
+                ]),
                 floatingActionButton: FloatingActionButton(onPressed: () { hasGroupChat = true; pushChat(); },
                   backgroundColor: Colors.white,
                   child: Icon(Icons.forum, size: 35, color: Colors.deepOrange),
