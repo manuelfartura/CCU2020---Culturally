@@ -1,13 +1,59 @@
+import 'package:culturally/MbwayPayment.dart';
+import 'package:culturally/PaypalPayment.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:culturally/main.dart';
 import './loginPage.dart';
 import './signUpPage.dart';
 import './visaPayment.dart';
+import './PaypalPayment.dart';
+import './MultibancoPayment.dart';
+import './MbwayPayment.dart';
 
 class mainPayment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    void pushVisaPayment(){
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return VisaPayment();
+            }
+        ),
+      );
+    }
+
+    void pushMbwayPayment(){
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return MbWayPayment();
+            }
+        ),
+      );
+    }
+
+    void pushPaypalPayment(){
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return PaypalPayment();
+            }
+        ),
+      );
+    }
+
+    void pushMultibancoPayment(){
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return MultibancoPayment();
+            }
+        ),
+      );
+    }
+
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.orange,
@@ -25,7 +71,7 @@ class mainPayment extends StatelessWidget {
                     color: Colors.white))),
         floatingActionButton: FloatingActionButton(onPressed: () {},
           backgroundColor: Colors.deepOrange,
-          child: Image.asset('images/groups.png', height: 35, width: 35,),
+          child: Image.asset('assets/groups.png', height: 35, width: 35,),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomAppBar(
@@ -80,56 +126,59 @@ class mainPayment extends StatelessWidget {
                     ]
                 )
             )),
-        body: Stack(
+        body: Column(
+          children: [Row(
             children: <Widget>[
-              new Positioned.fill(
-                  top: -500,
-                  right: 260,
+              Padding(
+                  padding: EdgeInsets.only(left:40, right:10),
+                  child : InkWell(
+                      onTap: pushVisaPayment,
+                      child: Container(
+                        width: 60,
+                        height:60,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(image: AssetImage('assets/visa.png'), scale: 1)
+                      ))),
+                    ),
+              Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child : InkWell(
+                    onTap: pushMbwayPayment,
                     child: Container(
-                      width: 250,
-                      height:250,
+                      width: 60,
+                      height:60,
                       decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage('images/visa.png'), scale: 2)
-                    )),
-                  ),
-              new Positioned.fill(
-                  top: -500,
-                  right: 90,
-                  child: Container(
-                    width: 250,
-                    height:250,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage('images/mbway.png'), scale: 2)
-                    ),
-                  )),
-              new Positioned.fill(
-                  top: -500,
-                  right: -80,
-                  child: Container(
-                    width: 250,
-                    height:250,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage('images/paypal.png'), scale: 2)
-                    ),
-                  )),
-              new Positioned.fill(
-                  top: -500,
-                  right: -250,
-                  child: Container(
-                    width: 250,
-                    height:250,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage('images/multibanco.png'), scale: 2)
-                    ),
-                  )),
-              new Align(
-                alignment: Alignment.center,
-                  child:Container(
-                    padding: EdgeInsets.only(bottom:380),
+                        image: DecorationImage(image: AssetImage('assets/mbway.png'), scale: 2)
+                      ),
+                  ))),
+              Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child : InkWell(
+                    onTap: pushPaypalPayment,
+                    child: Container(
+                      width: 60,
+                      height:60,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(image: AssetImage('assets/paypal.png'), scale: 2)
+                      ),
+                      ))),
+              Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child : InkWell(
+                    onTap: pushMultibancoPayment,
+                    child: Container(
+                       width: 60,
+                       height:60,
+                       decoration: BoxDecoration(
+                          image: DecorationImage(image: AssetImage('assets/multibanco.png'), scale: 2)
+                      ),
+                  )))]),
+              new Container(
+                    padding: EdgeInsets.only(bottom:380, right:10),
                     child: Text(
                     "Select a payment method above",
                     style: TextStyle(fontSize: 18.0),
                   ),
-            ))]));
+            )]));
   }
 }

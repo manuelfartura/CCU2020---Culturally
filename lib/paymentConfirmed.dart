@@ -24,7 +24,7 @@ class paymentConfirmed extends StatelessWidget {
                     color: Colors.white))),
         floatingActionButton: FloatingActionButton(onPressed: () {},
           backgroundColor: Colors.deepOrange,
-          child: Image.asset('images/groups.png', height: 35, width: 35,),
+          child: Image.asset('assets/groups.png', height: 35, width: 35,),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomAppBar(

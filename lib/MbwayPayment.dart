@@ -4,11 +4,57 @@ import 'package:culturally/main.dart';
 import './loginPage.dart';
 import './signUpPage.dart';
 import './paymentConfirmed.dart';
+import './VisaPayment.dart';
+import './PaypalPayment.dart';
+import './MultibancoPayment.dart';
+import './MbwayPayment.dart';
 
-class MbwayPayment extends StatelessWidget {
+class MbWayPayment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    void pushMultibancoPayment(){
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return MultibancoPayment();
+            }
+        ),
+      );
+    }
+
+    void pushVisaPayment(){
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return VisaPayment();
+            }
+        ),
+      );
+    }
+
+    void pushMbwayPayment(){
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return MbWayPayment();
+            }
+        ),
+      );
+    }
+
+    void pushPaypalPayment(){
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return PaypalPayment();
+            }
+        ),
+      );
+    }
+
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
             backgroundColor: Colors.orange,
             elevation: 9.0,
@@ -25,7 +71,7 @@ class MbwayPayment extends StatelessWidget {
                     color: Colors.white))),
         floatingActionButton: FloatingActionButton(onPressed: () {},
           backgroundColor: Colors.deepOrange,
-          child: Image.asset('images/groups.png', height: 35, width: 35,),
+          child: Image.asset('assets/groups.png', height: 35, width: 35,),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomAppBar(
@@ -80,48 +126,53 @@ class MbwayPayment extends StatelessWidget {
                     ]
                 )
             )),
-        body: Stack(
-            children: <Widget>[
-              new Positioned.fill(
-                  top: -500,
-                  right: 260,
-                  child: Container(
-                    width: 250,
-                    height:250,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage('images/visaSelected.png'), scale: 1.1)
-                    ),
-                  )),
-              new Positioned.fill(
-                  top: -500,
-                  right: 90,
-                  child: Container(
-                    width: 250,
-                    height:250,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage('images/mbway.png'), scale: 2)
-                    ),
-                  )),
-              new Positioned.fill(
-                  top: -500,
-                  right: -80,
-                  child: Container(
-                    width: 250,
-                    height:250,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage('images/paypal.png'), scale: 2)
-                    ),
-                  )),
-              new Positioned.fill(
-                  top: -500,
-                  right: -250,
-                  child: Container(
-                    width: 250,
-                    height:250,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage('images/multibanco.png'), scale: 2)
-                    ),
-                  )),
+        body: Column(
+            children: [Row(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(left:40, right:10),
+                    child : InkWell(
+                        onTap: pushVisaPayment,
+                        child: Container(
+                            width: 60,
+                            height:60,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(image: AssetImage('assets/visa.png'), scale: 1)
+                            ))),
+                  ),
+                  Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child : InkWell(
+                          onTap: pushMbwayPayment,
+                          child: Container(
+                            width: 60,
+                            height:60,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(image: AssetImage('assets/MBWaySelected.png'), scale: 1)
+                            ),
+                          ))),
+                  Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child : InkWell(
+                          onTap: pushPaypalPayment,
+                          child: Container(
+                            width: 60,
+                            height:60,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(image: AssetImage('assets/paypal.png'), scale: 2)
+                            ),
+                          ))),
+                  Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child : InkWell(
+                          onTap: pushMultibancoPayment,
+                          child: Container(
+                            width: 60,
+                            height:60,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(image: AssetImage('assets/multibanco.png'), scale: 2)
+                            ),
+                          )))]),
               new Container(
                   child: Column(
                       children: <Widget>[
@@ -130,7 +181,7 @@ class MbwayPayment extends StatelessWidget {
                             children: <Widget>[
                               Container(
                                   width: 340,
-                                  padding: EdgeInsets.only(top:120),
+                                  padding: EdgeInsets.only(top:10, bottom:10),
                                   child: TextField(
                                       textAlign: TextAlign.left,
                                       textAlignVertical: TextAlignVertical.center,
@@ -163,13 +214,13 @@ class MbwayPayment extends StatelessWidget {
                           style: TextStyle(fontSize: 20.0),
                         ),
                       ))),
-                      new Align(
-                      alignment: Alignment.center,
-                      child:Container(
-                        padding: EdgeInsets.only(bottom:180, left:30, right:30),
-                        child: Text(
+              new Align(
+                  alignment: Alignment.center,
+                  child:Container(
+                      padding: EdgeInsets.only(bottom:180, left:30, right:30),
+                      child: Text(
                         "You will receive a notification in a few seconds on your phone to accept this payment.",
-                          style: TextStyle(fontSize: 18.0),
-                        )))]));
+                        style: TextStyle(fontSize: 18.0),
+                      )))]));
   }
 }

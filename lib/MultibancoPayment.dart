@@ -4,23 +4,13 @@ import 'package:culturally/main.dart';
 import './loginPage.dart';
 import './signUpPage.dart';
 import './paymentConfirmed.dart';
-import './MbwayPayment.dart';
+import './VisaPayment.dart';
 import './PaypalPayment.dart';
-import './MultibancoPayment.dart';
+import './MbwayPayment.dart';
 
-class VisaPayment extends StatelessWidget {
+class MultibancoPayment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-    void pushMultibancoPayment(){
-      Navigator.of(context).push(
-        MaterialPageRoute<void>(
-            builder: (BuildContext context) {
-              return MultibancoPayment();
-            }
-        ),
-      );
-    }
 
     void pushVisaPayment(){
       Navigator.of(context).push(
@@ -47,6 +37,16 @@ class VisaPayment extends StatelessWidget {
         MaterialPageRoute<void>(
             builder: (BuildContext context) {
               return PaypalPayment();
+            }
+        ),
+      );
+    }
+
+    void pushMultibancoPayment(){
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return MultibancoPayment();
             }
         ),
       );
@@ -136,7 +136,7 @@ class VisaPayment extends StatelessWidget {
                             width: 60,
                             height:60,
                             decoration: BoxDecoration(
-                                image: DecorationImage(image: AssetImage('assets/visaSelected.png'), scale: 1)
+                                image: DecorationImage(image: AssetImage('assets/visa.png'), scale: 1)
                             ))),
                   ),
                   Padding(
@@ -147,7 +147,7 @@ class VisaPayment extends StatelessWidget {
                             width: 60,
                             height:60,
                             decoration: BoxDecoration(
-                                image: DecorationImage(image: AssetImage('assets/mbway.png'), scale: 2)
+                                image: DecorationImage(image: AssetImage('assets/mbway.png'), scale: 1)
                             ),
                           ))),
                   Padding(
@@ -169,79 +169,22 @@ class VisaPayment extends StatelessWidget {
                             width: 60,
                             height:60,
                             decoration: BoxDecoration(
-                                image: DecorationImage(image: AssetImage('assets/multibanco.png'), scale: 2)
+                                image: DecorationImage(image: AssetImage('assets/multibancoSelected.png'), scale: 1)
                             ),
                           )))]),
               new Container(
                   child: Column(
                       children: <Widget>[
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                  width: 340,
-                                  padding: EdgeInsets.only(top:20),
-                                  child: TextField(
-                                      textAlign: TextAlign.left,
-                                      textAlignVertical: TextAlignVertical.center,
-                                      obscureText: false,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.grey[300],
-                                        border: OutlineInputBorder(),
-                                        labelText: 'Card number',
-                                      )))]),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                  width: 340,
-                                  padding: EdgeInsets.only(top:15),
-                                  child: TextField(
-                                      textAlign: TextAlign.left,
-                                      textAlignVertical: TextAlignVertical.center,
-                                      obscureText: false,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.grey[300],
-                                        border: OutlineInputBorder(),
-                                        labelText: 'Expiration date (MM/YY)',
-                                      )))]),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                  width: 340,
-                                  padding: EdgeInsets.only(top:15),
-                                  child: TextField(
-                                      textAlign: TextAlign.left,
-                                      textAlignVertical: TextAlignVertical.center,
-                                      obscureText: true,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.grey[300],
-                                        border: OutlineInputBorder(),
-                                        labelText: 'CVV',
-                                      )))]),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                  width: 340,
-                                  padding: EdgeInsets.only(top:15, bottom:120),
-                                  child: TextField(
-                                      textAlign: TextAlign.left,
-                                      textAlignVertical: TextAlignVertical.center,
-                                      obscureText: true,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.grey[300],
-                                        border: OutlineInputBorder(),
-                                        labelText: 'Card holder name',
-                                      )))])
-                       ])),
+                              new Align(
+                                alignment: Alignment.center,
+                                child:Container(
+                                padding: EdgeInsets.only(bottom:280, right:70),
+                                child: Text(
+                                  "Entity\n99999\n\nATM (Multibanco) Reference\n123456789\n\nPrice\n22€",
+                                    style: TextStyle(fontSize: 18.0),
+                                )))])),
               new Positioned.fill(
-                  top: 450,
+                  top: 500,
                   child: Align(
                       alignment: Alignment.center,
                       child: FlatButton(
@@ -257,9 +200,10 @@ class VisaPayment extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          "Pay",
+                          "Done",
                           style: TextStyle(fontSize: 20.0),
                         ),
-                      )))]));
+                      ))),
+              ]));
   }
 }

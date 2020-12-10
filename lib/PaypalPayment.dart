@@ -5,10 +5,10 @@ import './loginPage.dart';
 import './signUpPage.dart';
 import './paymentConfirmed.dart';
 import './MbwayPayment.dart';
-import './PaypalPayment.dart';
+import './VisaPayment.dart';
 import './MultibancoPayment.dart';
 
-class VisaPayment extends StatelessWidget {
+class PaypalPayment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
@@ -136,7 +136,7 @@ class VisaPayment extends StatelessWidget {
                             width: 60,
                             height:60,
                             decoration: BoxDecoration(
-                                image: DecorationImage(image: AssetImage('assets/visaSelected.png'), scale: 1)
+                                image: DecorationImage(image: AssetImage('assets/visa.png'), scale: 1)
                             ))),
                   ),
                   Padding(
@@ -158,7 +158,7 @@ class VisaPayment extends StatelessWidget {
                             width: 60,
                             height:60,
                             decoration: BoxDecoration(
-                                image: DecorationImage(image: AssetImage('assets/paypal.png'), scale: 2)
+                                image: DecorationImage(image: AssetImage('assets/paypalSelected.png'), scale: 1)
                             ),
                           ))),
                   Padding(
@@ -189,14 +189,14 @@ class VisaPayment extends StatelessWidget {
                                         filled: true,
                                         fillColor: Colors.grey[300],
                                         border: OutlineInputBorder(),
-                                        labelText: 'Card number',
+                                        labelText: 'Paypal email address',
                                       )))]),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Container(
                                   width: 340,
-                                  padding: EdgeInsets.only(top:15),
+                                  padding: EdgeInsets.only(top:15, bottom:10),
                                   child: TextField(
                                       textAlign: TextAlign.left,
                                       textAlignVertical: TextAlignVertical.center,
@@ -205,41 +205,9 @@ class VisaPayment extends StatelessWidget {
                                         filled: true,
                                         fillColor: Colors.grey[300],
                                         border: OutlineInputBorder(),
-                                        labelText: 'Expiration date (MM/YY)',
-                                      )))]),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                  width: 340,
-                                  padding: EdgeInsets.only(top:15),
-                                  child: TextField(
-                                      textAlign: TextAlign.left,
-                                      textAlignVertical: TextAlignVertical.center,
-                                      obscureText: true,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.grey[300],
-                                        border: OutlineInputBorder(),
-                                        labelText: 'CVV',
-                                      )))]),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                  width: 340,
-                                  padding: EdgeInsets.only(top:15, bottom:120),
-                                  child: TextField(
-                                      textAlign: TextAlign.left,
-                                      textAlignVertical: TextAlignVertical.center,
-                                      obscureText: true,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.grey[300],
-                                        border: OutlineInputBorder(),
-                                        labelText: 'Card holder name',
+                                        labelText: 'Paypal password',
                                       )))])
-                       ])),
+                        ])),
               new Positioned.fill(
                   top: 450,
                   child: Align(
