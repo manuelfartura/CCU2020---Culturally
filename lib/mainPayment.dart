@@ -9,10 +9,21 @@ import './visaPayment.dart';
 import './PaypalPayment.dart';
 import './MultibancoPayment.dart';
 import './MbwayPayment.dart';
+import './main.dart';
 
 class mainPayment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    void pushHomepage(){
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return HomePage();
+            }
+        ),
+      );
+    }
 
     void pushVisaPayment(){
       Navigator.of(context).push(
@@ -100,7 +111,7 @@ class mainPayment extends StatelessWidget {
                             children: <Widget>[
                               IconButton(
                                   icon: Icon(Icons.home, color: Colors.white),
-                                  onPressed: null),
+                                  onPressed: pushHomepage),
                               IconButton(
                                 icon: Icon(Icons.favorite, color: Colors.white),
                                 //onPressed: pushFavorites

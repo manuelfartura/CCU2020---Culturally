@@ -3,10 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:culturally/main.dart';
 import './loginPage.dart';
 import './signUpPage.dart';
+import './main.dart';
 
 class paymentConfirmed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    void pushHomepage(){
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return HomePage();
+            }
+        ),
+      );
+    }
+
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.orange,
@@ -53,7 +65,7 @@ class paymentConfirmed extends StatelessWidget {
                             children: <Widget>[
                               IconButton(
                                   icon: Icon(Icons.home, color: Colors.white),
-                                  onPressed: null),
+                                  onPressed: pushHomepage),
                               IconButton(
                                 icon: Icon(Icons.favorite, color: Colors.white),
                                 //onPressed: pushFavorites

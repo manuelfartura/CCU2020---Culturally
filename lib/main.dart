@@ -2376,7 +2376,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     );
   }
 
-  Widget _buildCardForFriend(int id, String name, bool friend, String image, context) {
+  Widget _buildCardForFriend(int id, String name, bool friend, String image, String birthday, String email, String insta, String phone, String about,  context) {
 
     return Padding(
         padding: EdgeInsets.only(left: 1.0, top: 1.0, right: 1.0, bottom: 8.0),
@@ -2425,16 +2425,21 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                         Radius.circular(20.0)),
                                     color: Colors.orange
                                 ),
-                                child: Padding(
-                                  padding: EdgeInsets.all(6.0),
+                                child: InkWell(
+                                    onTap: () { pushProfile(id, name, birthday,
+                                email, insta, phone,
+                                about,
+                                image); },
+                                    child: Padding(
+                                      padding: EdgeInsets.all(6.0),
                                   /* ------------------- Type orange tag -------------------*/
-                                  child: Text('See profile', style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white)),
+                                      child: Text('See profile', style: TextStyle(
+                                        fontFamily: 'Roboto',
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white)),
                                 )
-                      ) ] ),
+    ) ) ] ),
                 Column(
                   children: [
                     IconButton(
@@ -2789,6 +2794,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                     Padding(
                       padding: EdgeInsets.only(top: 10.0),
                       child:  Container(
+                        width:390,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20.0),
                               boxShadow: [
@@ -2801,7 +2807,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                           child: Column(
                              children: [
                                Padding(
-                                 padding: EdgeInsets.only(left: 8, top: 15, bottom: 8),
+                                 padding: EdgeInsets.only(left: 15, top: 15, bottom: 8),
                                   child: Text('Preferred payment method', style: TextStyle(
                                       fontFamily: 'Roboto',
                                       fontSize: 16.0,
@@ -2810,11 +2816,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                                   ),
                                ),
                                Padding(
-                                 padding: EdgeInsets.only(left: 8, top: 8, bottom: 8),
+                                 padding: EdgeInsets.only(left: 15, top: 15, bottom: 8),
                                     child: Text('Visa ending in **39', style: TextStyle(
                                         fontFamily: 'Roboto',
                                         fontSize: 12.0,
-                                        color: Colors.black)
+                                        color: Colors.black),
                                     ),
                                   ),
                                 ],
@@ -3021,16 +3027,26 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 padding: EdgeInsets.all(10.0),
                 children: [
                  _buildCardForFriend(
-                        1,
+                        2,
                         'Beatriz Carvalho, 21',
                         BeatrizFriend,
                         'assets/beatriz.png',
+                        'April 29th 1999',
+                        'beatriz99@sapo.pt',
+                        'twitter.com/beacarvalho99',
+                        '938972365',
+                        'Hello, I’m an University student who likes to watch movies, listen to music and hang out with my friends.',
                         context),
                   _buildCardForFriend(
-                      2,
+                      3,
                       'Rodrigo Costa, 24',
                       RodrigoFriend,
                       'assets/rodrigo.png',
+                      'May 3rd 1996',
+                      'rodrigo@hotmail.com',
+                      'instagram.com/rodrigoc96',
+                      '932347622',
+                      'Hi. I’m an University student from Lisbon. I like to play videogames, go to the cinema and listening to music. I’m here to find some people to go to some interesting events.',
                       context),
                 ]
             ),
